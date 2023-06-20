@@ -1,6 +1,70 @@
-var inquirer = require('inquirer')
-var fs = require('fs')
-// const { default: inquirer } = require('inquirer')
+var inquirer = require('inquirer');
+var fs = require('fs');
+
+const readMeBlueprint = ({
+    title,
+    description,
+    installationInstructions,
+    usageInformation,
+    contributionGuidelines,
+    license,
+    testInstructions,
+    githubUsername,
+    emailAddress,
+}) =>  
+    `# ${title}
+
+    ## Description
+
+    ${description}
+
+    ## Table of Contents
+
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Constribution Guidelines](#contributionGuidelines)
+    - [License](#license)
+    - [Test Instructions](#testInstructions)
+    - [Github Username](#githubUsername)
+    - [Email Address](#emailAddress)
+
+    ## Installation
+
+    ${installationInstructions}
+
+    ## Usage
+
+    ${usageInformation}
+
+    ## How to Contribute
+
+    ${contributionGuidelines}
+
+    ## License
+
+    ${license}
+    The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+
+    ---
+
+    🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+
+    ## Badges
+
+    Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+
+    ## Tests
+
+    ${testInstructions}
+    Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+
+    ## Github username
+
+    ${githubUsername}
+
+    ## Email address
+
+    ${emailAddress}`
 
 inquirer
 .prompt([
@@ -17,17 +81,17 @@ inquirer
     {
     type: 'input',
     name: 'installationInstructions',
-    message: 'Include installation instructions for the project',
+    message: 'What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.',
     },
     {
     type: 'input',
     name: 'usageInformation',
-    message: 'Enter usage information',
+    message: 'Provide instructions and examples for use.',
     },
     {
     type: 'input',
     name: 'contributionGuidelines',
-    message: 'Enter contribution guidelines',
+    message: 'If you created an application or package and would like other developers to contribute to it, you can include guidelines for how to do so.',
     },
     {
     type: 'input',
@@ -37,7 +101,12 @@ inquirer
     {
     type: 'list',
     name: 'license',
-    choices: []
+    choices: [
+        'MIT License',
+        'Appache 2.0',
+        'ISC',
+        'Mozilla',
+        ]
     },
     {
     type: 'input',
@@ -48,10 +117,37 @@ inquirer
     type: 'input',
     name: 'emailAddress',
     message: 'Enter your email address'
-    }
+    },
 ])
 .then((answers) => {
     console.log(answers)
+    switch (answers.license) {
+        case 'MIT License':
+            answers.license = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+            let mitReadMeBlueprint = readMeBlueprint(answers)
+            fs.writeFile('README.md', mitReadMeBlueprint, (err) =>
+            err ? console.log(err) : console.log('success'));
+            break;
+        case 'Appache 2.0':
+            answers.license = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
+            let appacheReadMeBlueprint = readMeBlueprint(answers)
+            fs.writeFile('README.md', appacheReadMeBlueprint, (err) =>
+            err ? console.log(err) : console.log('success'));
+            break;
+        case 'ISC':
+            answers.license = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
+            let iscReadMeBlueprint = readMeBlueprint(answers)
+            fs.writeFile('README.md', iscReadMeBlueprint, (err) =>
+            err ? console.log(err) : console.log('success'));
+            break;
+        case 'Mozilla':
+            answers.license = '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)';
+            let mozillaReadMeBlueprint = readMeBlueprint(answers)
+            fs.writeFile('README.md', mozillaReadMeBlueprint, (err) =>
+            err ? console.log(err) : console.log('success'));
+            break;
+    };
+    
 })
 .catch((error) => {
     if (error.istTtyError) {
@@ -61,63 +157,3 @@ inquirer
     }
 })
 
-
-`# ${title}
-
-## Description
-
-${description}
-
-## Table of Contents (Optional)
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
-
-${installationInstructions}
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-
-## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an assets/images folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)
-
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
-
-Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute to it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.`
