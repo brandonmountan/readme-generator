@@ -11,60 +11,52 @@ const readMeBlueprint = ({
     testInstructions,
     githubUsername,
     emailAddress,
-}) =>  
-    `# ${title}
+}) =>  `
+# ${title}
 
-    ## Description
+${license}
 
-    ${description}
+## Description
 
-    ## Table of Contents
+${description}
 
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Constribution Guidelines](#contributionGuidelines)
-    - [License](#license)
-    - [Test Instructions](#testInstructions)
-    - [Github Username](#githubUsername)
-    - [Email Address](#emailAddress)
+## Table of Contents
 
-    ## Installation
+ - [Installation](#installation)
+ - [Usage](#usage)
+ - [Constribution Guidelines](#contributionGuidelines)
+ - [License](#license)
+ - [Test Instructions](#testInstructions)
+ - [Questions](#questions)
 
-    ${installationInstructions}
+## Installation
 
-    ## Usage
+${installationInstructions}
 
-    ${usageInformation}
+## Usage
 
-    ## How to Contribute
+${usageInformation}
 
-    ${contributionGuidelines}
+## How to Contribute
 
-    ## License
+${contributionGuidelines}
 
-    ${license}
-    The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+## Tests
 
-    ---
+${testInstructions}
 
-    🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+## License
 
-    ## Badges
+This application is covered under the ${license} license.
 
-    Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+## Questions
 
-    ## Tests
+Link to my github profile!
+[Github](github.com/${githubUsername})
+Send an email with any questions you have.
+[Email](${emailAddress})
 
-    ${testInstructions}
-    Go the extra mile and write tests for your application. Then provide examples on how to run them here.
-
-    ## Github username
-
-    ${githubUsername}
-
-    ## Email address
-
-    ${emailAddress}`
+`;
 
 inquirer
 .prompt([
@@ -150,10 +142,10 @@ inquirer
     
 })
 .catch((error) => {
-    if (error.istTtyError) {
-        console.log('there is an error')
+    if (error.isTtyError) {
+        console.log("Prompt couldn't be rendered in the current environment")
     } else {
-        console.log('there is an error')
+        console.log('Something else went wrong')
     }
 })
 
