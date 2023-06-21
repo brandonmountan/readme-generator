@@ -24,9 +24,9 @@ ${description}
 
  - [Installation](#installation)
  - [Usage](#usage)
- - [Constribution Guidelines](#contributionGuidelines)
+ - [Constribution Guidelines](#howtocontribute)
  - [License](#license)
- - [Test Instructions](#testInstructions)
+ - [Test Instructions](#tests)
  - [Questions](#questions)
 
 ## Installation
@@ -52,9 +52,10 @@ This application is covered under the ${license} license.
 ## Questions
 
 Link to my github profile!
-[Github](github.com/${githubUsername})
+(https://www.github.com/${githubUsername})
+
 Send an email with any questions you have.
-[Email](${emailAddress})
+(${emailAddress})
 
 `;
 
